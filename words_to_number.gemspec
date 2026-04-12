@@ -5,13 +5,14 @@ require_relative "lib/words_to_number/version"
 Gem::Specification.new do |spec|
   spec.name = "words_to_number"
   spec.version = WordsToNumber::VERSION
+  spec.license = "MIT"
   spec.authors = ["Kushal Mistry"]
   spec.email = ["kushal_mistry@outlook.com"]
 
   spec.summary = "Convert numbers written in words to integers"
   spec.description = "Parses English number words into integers up to one million"
   spec.homepage = "https://github.com/mistrikushal/words_to_number"
-  spec.required_ruby_version = ">= 2.6"
+  spec.required_ruby_version = "3.2"
 
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
 
