@@ -1,35 +1,87 @@
 # WordsToNumber
 
-TODO: Delete this and the text below, and describe your gem
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/words_to_number`. To experiment with that code, run `bin/console` for an interactive prompt.
+A Ruby gem that converts numbers written in English words into integers. Supports numbers from 0 up to 1,000,000 (positive and negative).
 
 ## Installation
-
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
 
 Install the gem and add to the application's Gemfile by executing:
 
 ```bash
-bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+bundle add words_to_number
 ```
 
 If bundler is not being used to manage dependencies, install the gem by executing:
 
 ```bash
-gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+gem install words_to_number
 ```
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require 'words_to_number'
+
+# Simple numbers
+WordsToNumber.convert("one")           # => 1
+WordsToNumber.convert("twenty")       # => 20
+WordsToNumber.convert("fifteen")       # => 15
+
+# Hundreds
+WordsToNumber.convert("two hundred")                        # => 200
+WordsToNumber.convert("two hundred forty-six")              # => 246
+
+# Thousands
+WordsToNumber.convert("one thousand")                                          # => 1_000
+WordsToNumber.convert("seven hundred eighty-three thousand nine hundred nineteen") # => 783_919
+
+# Millions
+WordsToNumber.convert("one million")                # => 1_000_000
+WordsToNumber.convert("two million five hundred thousand")  # => 2_500_000
+
+# Negative numbers
+WordsToNumber.convert("negative one")               # => -1
+WordsToNumber.convert("minus two hundred")           # => -200
+WordsToNumber.convert("negative one million")        # => -1_000_000
+
+# Zero
+WordsToNumber.convert("zero")                       # => 0
+```
+
+### Supported Number Words
+
+| Category | Words |
+|----------|-------|
+| Units | zero, one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen |
+| Tens | twenty, thirty, forty, fifty, sixty, seventy, eighty, ninety |
+| Multipliers | hundred, thousand, million |
+| Negative prefixes | negative, minus |
+
+### Hyphenated Numbers
+
+Numbers with hyphens (e.g., "twenty-one") are automatically handled:
+
+```ruby
+WordsToNumber.convert("twenty-one")       # => 21
+WordsToNumber.convert("ninety-nine")       # => 99
+WordsToNumber.convert("negative forty-two") # => -42
+```
+
+### "And" Handling
+
+The word "and" is ignored, making British English style numbers work:
+
+```ruby
+WordsToNumber.convert("one hundred and twenty-three")  # => 123
+```
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+After checking out the repo, run `bundle install` to install dependencies. Then, run `bundle exec rspec` to run the tests.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/words_to_number.
+Bug reports and pull requests are welcome on GitHub at https://github.com/mistrikushal/words_to_number.
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](LICENSE.txt).
